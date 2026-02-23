@@ -7,120 +7,144 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F4EDE0;--sb:#F9F4EB;--card:#FFFFFF;
-  --acc:#C4622D;--acc-dk:#8B3A15;--acc-lt:#FEF3EB;
-  --txt:#2C1A0E;--sub:#6B4F3A;--bdr:#E2D5C3;
-  --font:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;
+  --bg:#0b0e14;--sb:#11151d;--card:#141820;
+  --acc:#3b82f6;--acc-dk:#2563eb;--acc-lt:rgba(59,130,246,.12);
+  --txt:#e2e8f0;--sub:#8892a6;--bdr:#1e2433;
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;
+  --font:'SF Mono','Fira Code','PingFang SC','Microsoft YaHei',monospace,sans-serif;
+  --font-cn:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;
 }
 html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--txt)}
+::selection{background:var(--acc);color:#fff}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#2a3040;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#3a4050}
+
 header{
   position:sticky;top:0;z-index:100;
-  background:rgba(244,237,224,.97);backdrop-filter:blur(12px);
+  background:rgba(11,14,20,.95);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--bdr);
   display:flex;align-items:center;
-  padding:0 24px;height:56px;gap:14px;
+  padding:0 24px;height:52px;gap:14px;
 }
-.logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;
-  letter-spacing:.1em;color:var(--acc);text-decoration:none;flex-shrink:0}
-.logo-gem{width:12px;height:12px;background:var(--acc);transform:rotate(45deg)}
-.ticker{display:flex;gap:16px;font-size:12px;color:var(--sub);flex:1;min-width:0;overflow:hidden}
-.ticker b{color:var(--txt)}
-.ticker .dn{color:#D94F4F}
-.ticker .up{color:#10B981}
-.ticker .fear{color:var(--acc);font-weight:700}
-.tab-nav{display:flex;gap:2px;background:rgba(44,26,14,.08);padding:3px;border-radius:9px;flex-shrink:0}
-.tab-btn{padding:5px 20px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;
-  color:var(--sub);letter-spacing:.03em;transition:.15s;white-space:nowrap}
-.tab-btn.active{background:var(--acc);color:#fff;box-shadow:0 1px 4px rgba(196,98,45,.4)}
-.tab-btn:hover:not(.active){background:rgba(196,98,45,.1);color:var(--acc)}
-.date-pill{background:var(--card);border:1px solid var(--bdr);border-radius:20px;
-  padding:4px 12px;font-size:12px;color:var(--sub);flex-shrink:0}
+.logo{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;
+  letter-spacing:.15em;color:#fff;text-decoration:none;flex-shrink:0;text-transform:uppercase}
+.logo-gem{width:10px;height:10px;background:var(--acc);transform:rotate(45deg);border-radius:2px}
+.ticker{display:flex;gap:18px;font-size:11px;color:var(--sub);flex:1;min-width:0;overflow:hidden;letter-spacing:.02em}
+.ticker b{font-weight:600}
+.ticker .dn{color:var(--red)}
+.ticker .up{color:var(--green)}
+.ticker .fear{color:var(--amber);font-weight:700}
+
+.tab-nav{display:flex;gap:2px;background:rgba(255,255,255,.04);padding:3px;border-radius:8px;flex-shrink:0;border:1px solid var(--bdr)}
+.tab-btn{padding:5px 20px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;
+  color:var(--sub);letter-spacing:.06em;transition:.2s;white-space:nowrap;text-transform:uppercase}
+.tab-btn.active{background:var(--acc);color:#fff;box-shadow:0 0 12px rgba(59,130,246,.35)}
+.tab-btn:hover:not(.active){background:rgba(59,130,246,.1);color:var(--acc)}
+
+.date-pill{background:var(--card);border:1px solid var(--bdr);border-radius:6px;
+  padding:4px 12px;font-size:11px;color:var(--sub);flex-shrink:0;letter-spacing:.03em}
 .upd-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sub);
-  background:var(--bg);border:1px solid var(--bdr);border-radius:20px;
+  background:var(--card);border:1px solid var(--bdr);border-radius:6px;
   padding:3px 10px;flex-shrink:0;transition:.2s}
-.upd-pill .upd-dot{width:6px;height:6px;border-radius:50%;background:#10B981;flex-shrink:0}
-.upd-pill .upd-dot.stale{background:#F59E0B}
+.upd-pill .upd-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;
+  box-shadow:0 0 6px rgba(34,197,94,.5);animation:pulse 2s ease-in-out infinite}
+.upd-pill .upd-dot.stale{background:var(--amber);box-shadow:0 0 6px rgba(245,158,11,.5);animation:none}
 .upd-pill b{color:var(--txt);font-weight:600}
-.layout{display:flex;max-width:1260px;margin:0 auto;padding:20px 16px;gap:18px}
-aside{width:272px;flex-shrink:0;position:sticky;top:76px;
-  height:calc(100vh - 94px);overflow-y:auto;padding-right:4px}
-aside::-webkit-scrollbar{width:3px}
-aside::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.layout{display:flex;max-width:1320px;margin:0 auto;padding:14px 16px;gap:14px}
+aside{width:280px;flex-shrink:0;position:sticky;top:66px;
+  height:calc(100vh - 80px);overflow-y:auto;padding-right:4px}
 .date-sel{background:var(--card);border:1px solid var(--bdr);border-radius:8px;
   padding:9px 14px;display:flex;align-items:center;gap:8px;
-  font-size:13px;color:var(--sub);margin-bottom:12px}
-.topic-list{display:flex;flex-direction:column;gap:3px}
-.t-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;
+  font-size:12px;color:var(--sub);margin-bottom:10px}
+.topic-list{display:flex;flex-direction:column;gap:2px}
+.t-item{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;
   border-radius:8px;cursor:pointer;border:1px solid transparent;transition:.15s}
-.t-item:hover{background:rgba(196,98,45,.07);border-color:var(--bdr)}
-.t-item.active{background:var(--acc-dk);border-color:var(--acc-dk)}
-.t-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;font-size:12px;
+.t-item:hover{background:rgba(59,130,246,.06);border-color:var(--bdr)}
+.t-item.active{background:var(--acc-dk);border-color:var(--acc);box-shadow:0 0 16px rgba(37,99,235,.15)}
+.t-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;font-size:11px;
   font-weight:700;display:flex;align-items:center;justify-content:center;
-  background:var(--bg);color:#B8A090;margin-top:1px}
-.t-item.active .t-num{background:rgba(255,255,255,.2);color:#fff}
+  background:rgba(255,255,255,.06);color:var(--sub);margin-top:1px}
+.t-item.active .t-num{background:rgba(255,255,255,.15);color:#fff}
 .t-info{flex:1;min-width:0}
-.t-title{font-size:12.5px;line-height:1.45;color:var(--sub)}
-.t-item.active .t-title{color:#fff;font-weight:500}
+.t-title{font-size:12px;line-height:1.5;color:var(--sub);font-family:var(--font-cn)}
+.t-item.active .t-title{color:#fff;font-weight:600}
 .t-item:hover:not(.active) .t-title{color:var(--acc)}
-.s-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;
-  border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.03em;margin-top:4px}
-.s-super-bull{background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7}
-.s-bull{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
-.s-bear{background:#FEF2F2;color:#991B1B;border:1px solid #FCA5A5}
-.s-super-bear{background:#7F1D1D;color:#FECACA;border:1px solid #F87171}
-.t-item.active .s-badge{opacity:.8}
+
+.s-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;
+  border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.04em;margin-top:5px}
+.s-super-bull{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+.s-bull{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
+.s-bear{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.s-super-bear{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.t-item.active .s-badge{opacity:.85}
+
 main{flex:1;min-width:0}
-.a-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:36px 42px}
-.a-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;
-  padding:3px 10px;border-radius:12px;margin-bottom:12px}
-.tag-tf{background:#FFF0E0;color:var(--acc)}
-.tag-news{background:#EBF4FF;color:#1D4ED8}
-.a-title{font-size:22px;font-weight:800;line-height:1.4;color:var(--txt);
-  border-left:4px solid var(--acc);padding-left:14px}
-.s-badge-lg{display:inline-flex;align-items:center;gap:6px;padding:6px 18px;
-  border-radius:20px;font-size:14px;font-weight:800;letter-spacing:.05em;margin:14px 0 16px}
-.slg-super-bull{background:#ECFDF5;color:#065F46;border:2px solid #34D399}
-.slg-bull{background:#F0FDF4;color:#166534;border:2px solid #86EFAC}
-.slg-bear{background:#FEF2F2;color:#991B1B;border:2px solid #FCA5A5}
-.slg-super-bear{background:#450A0A;color:#FCA5A5;border:2px solid #EF4444}
+.a-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:32px 38px}
+.a-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:3px 10px;border-radius:4px;margin-bottom:14px;text-transform:uppercase}
+.tag-tf{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)}
+.tag-news{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+.a-title{font-size:21px;font-weight:800;line-height:1.45;color:#fff;
+  border-left:3px solid var(--acc);padding-left:14px;font-family:var(--font-cn)}
+
+.s-badge-lg{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;
+  border-radius:6px;font-size:13px;font-weight:800;letter-spacing:.05em;margin:14px 0 16px}
+.slg-super-bull{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.35)}
+.slg-bull{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.25)}
+.slg-bear{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.slg-super-bear{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.35)}
+
 .src-row{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 18px}
-.src-chip{background:var(--acc-lt);border:1px solid var(--bdr);border-radius:20px;
-  padding:3px 10px;font-size:11px;color:var(--acc);text-decoration:none}
-.src-chip:hover{background:var(--acc);color:#fff}
-.heat-tag{font-size:11px;padding:3px 10px;border-radius:20px;
-  background:#FFF7ED;color:#92400E;border:1px solid #FDE68A;cursor:default}
-.sec-h{font-size:15px;font-weight:700;color:var(--acc);
-  border-left:4px solid var(--acc);padding-left:10px;margin:22px 0 12px}
-.body{font-size:15px;line-height:1.9;color:#3D2A1E}
+.src-chip{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:4px;
+  padding:3px 10px;font-size:10px;color:var(--acc);text-decoration:none;letter-spacing:.02em;transition:.15s}
+.src-chip:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+.heat-tag{font-size:10px;padding:3px 10px;border-radius:4px;
+  background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.25);cursor:default}
+
+.sec-h{font-size:14px;font-weight:700;color:var(--acc);
+  border-left:3px solid var(--acc);padding-left:10px;margin:24px 0 12px;
+  letter-spacing:.03em;font-family:var(--font-cn)}
+.body{font-size:14px;line-height:1.85;color:var(--sub);font-family:var(--font-cn)}
 .body p{margin-bottom:13px}
-.body strong,.body b{color:var(--acc);font-weight:600}
-.body a{color:var(--acc);text-decoration:none;border-bottom:1px solid rgba(196,98,45,.3)}
-.body a:hover{border-color:var(--acc)}
-.news-items{margin-top:8px;display:flex;flex-direction:column;gap:6px}
-.n-item{border:1px solid var(--bdr);border-radius:10px;overflow:hidden;transition:.12s}
+.body strong,.body b{color:var(--green);font-weight:600}
+.body a{color:var(--acc);text-decoration:none;border-bottom:1px solid rgba(59,130,246,.3)}
+.body a:hover{border-color:var(--acc);color:#93bbfc}
+
+.news-items{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+.n-item{border:1px solid var(--bdr);border-radius:8px;overflow:hidden;transition:.15s}
+.n-item:hover{border-color:rgba(59,130,246,.25)}
 .n-item-head{display:flex;align-items:center;gap:10px;padding:10px 14px;
-  cursor:pointer;background:var(--bg);transition:.12s;user-select:none}
-.n-item-head:hover{background:var(--acc-lt)}
-.n-item.open .n-item-head{background:var(--acc-lt)}
+  cursor:pointer;background:rgba(255,255,255,.02);transition:.15s;user-select:none}
+.n-item-head:hover{background:rgba(59,130,246,.06)}
+.n-item.open .n-item-head{background:rgba(59,130,246,.08);border-left:2px solid var(--acc)}
 .n-item-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;
-  background:var(--bdr);color:var(--sub);font-size:11px;font-weight:700;
+  background:rgba(255,255,255,.06);color:var(--sub);font-size:10px;font-weight:700;
   display:flex;align-items:center;justify-content:center}
-.n-item-title{flex:1;font-size:13px;color:var(--txt);font-weight:500;line-height:1.4}
-.n-item-imp{flex-shrink:0;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
-.imp-bull{background:#D1FAE5;color:#065F46}
-.imp-neutral{background:#F3F4F6;color:#6B7280}
-.imp-bear{background:#FEE2E2;color:#991B1B}
-.n-expand{margin-left:6px;font-size:10px;color:#B8A090;flex-shrink:0;transition:.15s}
-.n-item.open .n-expand{transform:rotate(180deg)}
-.n-item-body{padding:10px 14px 12px;border-top:1px solid var(--bdr);
-  font-size:13px;line-height:1.75;color:var(--sub);display:none}
+.n-item-title{flex:1;font-size:12.5px;color:var(--txt);font-weight:500;line-height:1.45;
+  font-family:var(--font-cn)}
+.n-item-imp{flex-shrink:0;font-size:10px;padding:2px 8px;border-radius:4px;font-weight:700;letter-spacing:.03em}
+.n-item-time{flex-shrink:0;font-size:10px;color:var(--sub);white-space:nowrap;opacity:.75}
+.imp-bull{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.imp-neutral{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2)}
+.imp-bear{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.n-expand{margin-left:6px;font-size:10px;color:var(--sub);flex-shrink:0;transition:.2s}
+.n-item.open .n-expand{transform:rotate(180deg);color:var(--acc)}
+.n-item-body{padding:12px 14px 14px;border-top:1px solid var(--bdr);
+  font-size:12.5px;line-height:1.8;color:var(--sub);display:none;font-family:var(--font-cn)}
 .n-item.open .n-item-body{display:block}
+
 .nav-row{display:flex;justify-content:space-between;margin-top:28px;align-items:center}
-.nav-btn{background:var(--card);border:1px solid var(--bdr);border-radius:8px;
-  padding:8px 18px;font-size:13px;color:var(--sub);cursor:pointer;transition:.15s}
-.nav-btn:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
-.nav-btn:disabled{opacity:.3;cursor:not-allowed}
-.nav-ct{font-size:12px;color:#aaa}
+.nav-btn{background:var(--card);border:1px solid var(--bdr);border-radius:6px;
+  padding:8px 18px;font-size:12px;color:var(--sub);cursor:pointer;transition:.15s;
+  font-family:var(--font);letter-spacing:.03em}
+.nav-btn:hover{background:var(--acc);color:#fff;border-color:var(--acc);box-shadow:0 0 12px rgba(59,130,246,.3)}
+.nav-btn:disabled{opacity:.25;cursor:not-allowed;box-shadow:none}
+.nav-ct{font-size:11px;color:var(--sub)}
+
 @media(max-width:820px){
   .layout{flex-direction:column}
   aside{width:100%;position:static;height:auto;max-height:300px}
@@ -135,13 +159,13 @@ main{flex:1;min-width:0}
 <header>
   <a class="logo" href="#"><div class="logo-gem"></div>CRYPTO DAILY</a>
   <div class="ticker">
-    <span>BTC <b class="dn">$64,776</b></span>
-    <span>ETH <b class="dn">$1,863</b></span>
-    <span>SOL <b class="dn">$77.7</b></span>
-    <span>XRP <b class="dn">$1.34</b></span>
-    <span>HYPE <b class="dn">$27.5</b></span>
-    <span>AVAX <b class="dn">$8.41</b></span>
-    <span>恐慌指数 <b class="fear">14/100 😱</b></span>
+    <span>BTC <b class="dn">$65,671</b></span>
+    <span>ETH <b class="dn">$1,881</b></span>
+    <span>SOL <b class="dn">$78.9</b></span>
+    <span>XRP <b class="dn">$1.37</b></span>
+    <span>HYPE <b class="dn">$27.8</b></span>
+    <span>AVAX <b class="dn">$8.56</b></span>
+    <span>恐慌指数 <b class="fear">5/100 😱</b></span>
   </div>
   <div class="tab-nav">
     <div class="tab-btn active" id="tabNews" onclick="switchTab('news')">News</div>
@@ -238,7 +262,7 @@ const ASSETS = [
     id:'btc', icon:'₿', name:'BTC · 比特币',
     sc:'slg-bull', sc2:'s-bull', label:'📈 利多',
     heat:'13条相关报道（含3条X KOL热议）',
-    summary:'综合今日10条多维信息源：BTC Sharpe Ratio跌至历史最低-38.38，与2015/2019/2022牛市起点高度相似；Trump加码全球关税至15%令BTC短线跌至$67,000后稳于$68,000，展现韧性。Strategy再度买入2,486枚BTC，小散户持仓创年内最高，链上数据与价格背离加大。ETF四连周流出（累计$38亿）和鲸鱼分配构成短期压力，但底部积累信号持续增多。',
+    summary:'BTC现报$65,671，YTD跌幅约-24%，年初以来最差开局。Trump将全球关税加码至15%令BTC短线跌至$64K后反弹；短期鲸鱼持仓$26亿未实现亏损创近期高点。ETF四连周流出（累计$38亿）构成压力，但BTC Sharpe Ratio跌至历史最低-38.38，与2015/2019/2022牛市起点高度相似，底部积累信号持续增多。',
     analysis:`今日BTC市场综合利多/利空：\n\n**⚠️ 短期利空压力**：\n- Trump将全球关税从10%上调至15%（法定上限），使用《贸易法》第122条绕过最高法院违宪裁定，市场对政策不确定性继续定价\n- 比特币现货ETF四连周净流出，累计约$38亿；鲸鱼（持仓10-10,000 BTC）自10月峰值持续减仓，散户孤掌难鸣——价格反弹需要大资金重新入场才能持续\n- K33研究指出BTC进入类似2022年末的熊市底部震荡阶段，$60K-$75K区间将是延长积累期\n\n**✅ 底部信号积累**：\n- **BTC Sharpe Ratio跌至-38.38**，历史上三次触及类似负极值：2015年初（→此后12个月涨1500%）、2019年初（→此后涨100%+）、2022年末（→此后涨300%+）。分析师van de Poppe称"这是历史认证的低风险积累区"\n- 小散户（持仓<0.1 BTC钱包）供给量创2024年中以来最高——历史上散户在大户分配期悄悄积累，往往是底部确认信号\n- Strategy再买2,486枚BTC（$1.68亿），总持仓717,131枚；尽管mNAV首次跌破1，Saylor明确表示即便BTC跌至$8,000也不会被迫出售（已储备2.5年以上的债务覆盖能力）\n- BTC哈希率实现V形复苏，链上算力健康为价格支撑提供基本面背书\n- 标准渣打维持年底$10万中位目标，历史上2月BTC胜率78%\n\n**综合判断**：短期$67,000-$70,000区间震荡，中期若关税不确定性缓解+ETF流出停止，有较大上攻空间。当前为高性价比分批布局区。`,
     sources:[
       {name:'CoinDesk',url:'https://www.coindesk.com/markets/2026/02/21/bitcoin-price-slips-after-trump-hikes-worldwide-tariff-to-15-from-10-despite-supreme-court-decision'},
@@ -248,26 +272,26 @@ const ASSETS = [
       {name:'Fortune',url:'https://fortune.com/2026/02/20/michael-saylor-bitcoin-prices-preferred-shares-dilution-strategy/'}
     ],
     items:[
-      {num:1, title:'BTC Sharpe Ratio跌至历史最低-38.38，积累信号触发', imp:'bull', brief:'分析师van de Poppe：历史上三次触及类似负极值（2015/2019/2022）均在随后12个月内迎来大幅反弹，当前为"历史认证低风险积累区"。'},
-      {num:2, title:'Trump将全球关税加码至15%，BTC短线跌$67K后稳于$65K附近', imp:'bear', brief:'Trump用《贸易法》第122条绕过最高法院违宪裁定，将全球关税升至法定上限15%；触发史上最大加密杠杆清算事件——单次$190亿杠杆在市场闪崩中蒸发（CoinGlass数据），BTC当前已滑落至$64,776。'},
-      {num:3, title:'Strategy再购2,486枚BTC（$1.68亿），总持仓717,131枚', imp:'bull', brief:'但mNAV首次跌破1.0（市值低于持有的BTC价值）；Saylor表示已备好2.5年债务覆盖，BTC跌至$8,000亦不会被迫出售。'},
-      {num:4, title:'BTC现货ETF四连周净流出，累计约$38亿', imp:'bear', brief:'鲸鱼（持仓10-10,000 BTC）自10月峰值持续减仓；散户单独支撑下价格反弹脆弱——需大资金重入才能形成持续上行。'},
-      {num:5, title:'K33研究：BTC进入类2022末熊市底部，$60K-$75K区间震荡或持续数周', imp:'neutral', brief:'K33分析师Vetle Lunde称BTC处于延长积累期，类比2022年11月-2023年1月阶段；但同时表示这是"有耐心的投资者具有吸引力的积累区"。'},
-      {num:6, title:'小散户（<0.1 BTC钱包）持仓创2024年中以来最高', imp:'bull', brief:'大户分配期散户悄悄积累的背离现象，历史上是底部确认的重要链上信号，聪明钱布局行为明显。'},
-      {num:7, title:'BTC哈希率实现V形复苏，链上算力创年内新高', imp:'bull', brief:'算力健康反映矿工长期投入意愿，为价格提供基本面背书；矿工不大规模停机则暗示未达极端亏损临界点。'},
-      {num:8, title:'标准渣打维持年底$10万中位目标，警告宏观恶化情形下$55K风险', imp:'neutral', brief:'标准渣打：ETF持续流入为主要驱动；布隆伯格警告若美联储持续紧缩可能测试$55K。两大机构在同一时间的分歧表明市场真正处于预期拐点。'},
-      {num:9, title:'比特币"bitcoin zero"谷歌搜索量突破100满分，创历史纪录', imp:'bull', brief:'美国用户搜索"bitcoin to zero"在谷歌相对兴趣量表达到100（满分），历史上极端悲观情绪往往是价格底部的反向指标。'},
-      {num:10, title:'MARA完成$1.68亿收购法国EDF旗下AI数据中心Exaion 64%股权', imp:'bull', brief:'法国政府批准、含严格主权保护条款；MARA将在法国核电网络上运行高性能计算，比特币矿工AI化转型加速；MARA持53,250 BTC，仅次于Strategy。'},
-      {num:31, title:'🐦 X KOL | 摩根大通：BTC/黄金波动率比降至历史新低1.5x，机构将引领2026年反弹', imp:'bull', brief:'摩根大通分析师Panigirtzoglou：BTC相对黄金的波动率比例降至1.5（历史最低），在波动性调整后BTC正变得比黄金更具吸引力；该行预计2025年机构资金流入$1,300亿，2026年机构资金将引领下一轮上行。Source: @JPMorgan / TheStreet Crypto'},
-      {num:32, title:'🐦 X KOL | Santiment链上警示：鲸鱼5周净抛售BTC供应量0.5%，散户孤力撑盘不可持续', imp:'bear', brief:'Santiment链上数据：持有10-10,000 BTC的鲸鱼钱包在过去5周净减持约0.5%总供应量；与此同时持仓<0.01 BTC的微型钱包在大举买入——散户单独撑盘历史上从未能维持持久反弹，等鲸鱼重新入场才是反转信号。Source: @santimentfeed'},
-      {num:33, title:'🐦 X KOL | CoinShares报告：量子计算威胁被严重夸大，真正有市场风险的BTC仅10,200枚', imp:'neutral', brief:'CoinShares研究：约160万枚BTC在理论上的量子攻击风险中（P2PK地址），但能引起实际市场冲击的集中持仓仅约10,200枚；破解比特币椭圆曲线加密需要比现有量子计算机强100,000倍的设备，暂不构成近期威胁。Source: @CoinSharesCo'}
+      {num:1, title:'BTC Sharpe Ratio跌至历史最低-38.38，积累信号触发', imp:'bull', ago:'2小时前', brief:'分析师van de Poppe：历史上三次触及类似负极值（2015/2019/2022）均在随后12个月内迎来大幅反弹，当前为"历史认证低风险积累区"。'},
+      {num:2, title:'Trump将全球关税加码至15%，BTC短线跌$64K后反弹至$65,671', imp:'bear', ago:'1小时前', brief:'Trump用《贸易法》第122条绕过最高法院违宪裁定，将全球关税升至法定上限15%；触发史上最大加密杠杆清算事件——单次$190亿杠杆在市场闪崩中蒸发（CoinGlass数据）；目前BTC已从$64K低点反弹至$65,671。'},
+      {num:3, title:'Strategy再购2,486枚BTC（$1.68亿），总持仓717,131枚', imp:'bull', ago:'6小时前', brief:'但mNAV首次跌破1.0（市值低于持有的BTC价值）；Saylor表示已备好2.5年债务覆盖，BTC跌至$8,000亦不会被迫出售。'},
+      {num:4, title:'BTC现货ETF四连周净流出，累计约$38亿', imp:'bear', ago:'4小时前', brief:'鲸鱼（持仓10-10,000 BTC）自10月峰值持续减仓；散户单独支撑下价格反弹脆弱——需大资金重入才能形成持续上行。'},
+      {num:5, title:'K33研究：BTC进入类2022末熊市底部，$60K-$75K区间震荡或持续数周', imp:'neutral', ago:'8小时前', brief:'K33分析师Vetle Lunde称BTC处于延长积累期，类比2022年11月-2023年1月阶段；但同时表示这是"有耐心的投资者具有吸引力的积累区"。'},
+      {num:6, title:'小散户（<0.1 BTC钱包）持仓创2024年中以来最高', imp:'bull', ago:'1天前', brief:'大户分配期散户悄悄积累的背离现象，历史上是底部确认的重要链上信号，聪明钱布局行为明显。'},
+      {num:7, title:'BTC哈希率实现V形复苏，链上算力创年内新高', imp:'bull', ago:'1天前', brief:'算力健康反映矿工长期投入意愿，为价格提供基本面背书；矿工不大规模停机则暗示未达极端亏损临界点。'},
+      {num:8, title:'标准渣打维持年底$10万中位目标，警告宏观恶化情形下$55K风险', imp:'neutral', ago:'2天前', brief:'标准渣打：ETF持续流入为主要驱动；布隆伯格警告若美联储持续紧缩可能测试$55K。两大机构在同一时间的分歧表明市场真正处于预期拐点。'},
+      {num:9, title:'比特币"bitcoin zero"谷歌搜索量突破100满分，创历史纪录', imp:'bull', ago:'3小时前', brief:'美国用户搜索"bitcoin to zero"在谷歌相对兴趣量表达到100（满分），历史上极端悲观情绪往往是价格底部的反向指标。'},
+      {num:10, title:'MARA完成$1.68亿收购法国EDF旗下AI数据中心Exaion 64%股权', imp:'bull', ago:'2天前', brief:'法国政府批准、含严格主权保护条款；MARA将在法国核电网络上运行高性能计算，比特币矿工AI化转型加速；MARA持53,250 BTC，仅次于Strategy。'},
+      {num:31, title:'🐦 X KOL | 摩根大通：BTC/黄金波动率比降至历史新低1.5x，机构将引领2026年反弹', imp:'bull', ago:'5小时前', brief:'摩根大通分析师Panigirtzoglou：BTC相对黄金的波动率比例降至1.5（历史最低），在波动性调整后BTC正变得比黄金更具吸引力；该行预计2025年机构资金流入$1,300亿，2026年机构资金将引领下一轮上行。Source: @JPMorgan / TheStreet Crypto'},
+      {num:32, title:'🐦 X KOL | Santiment链上警示：鲸鱼5周净抛售BTC供应量0.5%，散户孤力撑盘不可持续', imp:'bear', ago:'7小时前', brief:'Santiment链上数据：持有10-10,000 BTC的鲸鱼钱包在过去5周净减持约0.5%总供应量；与此同时持仓<0.01 BTC的微型钱包在大举买入——散户单独撑盘历史上从未能维持持久反弹，等鲸鱼重新入场才是反转信号。Source: @santimentfeed'},
+      {num:33, title:'🐦 X KOL | CoinShares报告：量子计算威胁被严重夸大，真正有市场风险的BTC仅10,200枚', imp:'neutral', ago:'1天前', brief:'CoinShares研究：约160万枚BTC在理论上的量子攻击风险中（P2PK地址），但能引起实际市场冲击的集中持仓仅约10,200枚；破解比特币椭圆曲线加密需要比现有量子计算机强100,000倍的设备，暂不构成近期威胁。Source: @CoinSharesCo'}
     ]
   },
   {
     id:'eth', icon:'Ξ', name:'ETH · 以太坊',
     sc:'slg-bull', sc2:'s-bull', label:'📈 利多',
     heat:'3条相关报道',
-    summary:'ETH YTD-34%超越BTC（-24%），现货ETF单日净流出$4,180万，短期技术面承压（$1,900为关键支撑）。但ETHDenver 2026（2月23-28日）作为世界最大以太坊开发者大会正在进行中，多项L2和DeFi重磅路线图将在本周发布。AI四大模型共识：ETH 2026基础目标$8,000，牛市目标$18,000，技术叙事持续积累。',
+    summary:'ETH现报$1,881，YTD跌幅约-34%，超越BTC（-24%）。重磅利空：Vitalik过去两日卖出1,869 ETH（约$367万），ETH同期从$1,988跌至$1,875；ETF单日净流出$4,180万。ETHDenver 2026（2月23-28日）今日开幕，历史规律显示大会后往往触底反弹，本周是布局信息差关键窗口。',
     analysis:`ETH今日的多空格局：\n\n**短期压力**：\n- YTD跌幅34%超越BTC的24%，ETH本轮的Beta风险正在被市场充分定价\n- 现货ETH ETF单日净流出$4,180万，机构层面信心尚未稳定；技术面关键支撑位$1,900，跌破将开启至$1,650的更深回调\n\n**中长期催化剂**（本周重点关注ETHDenver）：\n- ETHDenver 2026（2月23日-28日）是全球最大的以太坊开发者大会，今年预计有数千名开发者参与。历史规律：ETHDenver通常在熊市底部附近举办（2019/2023年均如此），之后往往开启开发者驱动的上涨周期。本周将有多个L2、DeFi和核心协议团队集中发布2026技术路线图，提前布局ETH生态的机会窗口。\n- **AI量化分析方法引发热议**：4个主流AI模型（Claude/GPT/Gemini/Grok）的ETH预测中位数为：基础情景$8,000（+300%），牛市情景$18,000（+800%）。AI预测的趋同性正在成为市场参与者决策参考，这本身就是价格催化剂。\n- BNP巴黎银行继续在ETH链上运营欧元货币市场基金，机构级信任的积累是沉默的利多。\n\n**结论**：短期依靠ETHDenver公告和开发者情绪修复；中期等待技术面$2,100确认，长期升级路线图清晰，基本面完整。`,
     sources:[
       {name:'CoinDesk',url:'https://www.coindesk.com/markets/2026/02/19/bitcoin-ether-xrp-etfs-bleed-while-solana-bucks-outflow-trend'},
@@ -275,9 +299,10 @@ const ASSETS = [
       {name:'Yahoo Finance',url:'https://finance.yahoo.com/news/ai-models-predict-ethereum-solana-193044962.html'}
     ],
     items:[
-      {num:11, title:'ETH现货ETF单日净流出$4,180万，YTD跌幅34%超越BTC（-24%）', imp:'bear', brief:'ETH ETF资金阶段性流出与价格下跌形成负反馈；技术面$1,900为关键支撑，若跌破可能引发至$1,650的更深回调。'},
-      {num:12, title:'ETHDenver 2026（2月23-28日）进行中，本周L2/DeFi重磅路线图待发布', imp:'bull', brief:'全球最大以太坊开发者大会，数千名建设者参与。历史规律：ETHDenver往往在熊市底部举办，之后开启开发者驱动上涨周期；本周是布局ETH生态信息差的关键窗口。'},
-      {num:13, title:'AI四大模型共识：ETH 2026基础目标$8,000，牛市目标$18,000', imp:'bull', brief:'Claude/GPT/Gemini/Grok四大模型中位数预测ETH基础情景$8K（+300%），牛市$18K（+800%）；AI量化分析方法正在成为市场参与者决策参考新标准。'}
+      {num:11, title:'ETH现货ETF单日净流出$4,180万，YTD跌幅34%超越BTC（-24%）', imp:'bear', ago:'3小时前', brief:'ETH ETF资金阶段性流出与价格下跌形成负反馈；技术面$1,900为关键支撑，若跌破可能引发至$1,650的更深回调。'},
+      {num:12, title:'ETHDenver 2026（2月23-28日）今日开幕，L2/DeFi重磅路线图本周集中发布', imp:'bull', ago:'30分钟前', brief:'全球最大以太坊开发者大会今日正式开幕，数千名建设者参与。历史规律：ETHDenver往往在熊市底部附近举办（2019/2023年均如此），会后通常开启开发者驱动上涨周期；本周是布局ETH生态信息差的关键窗口。'},
+      {num:13, title:'AI四大模型共识：ETH 2026基础目标$8,000，牛市目标$18,000', imp:'bull', ago:'2天前', brief:'Claude/GPT/Gemini/Grok四大模型中位数预测ETH基础情景$8K（+300%），牛市$18K（+800%）；AI量化分析方法正在成为市场参与者决策参考新标准。'},
+      {num:42, title:'🚨 Vitalik近两日卖出1,869 ETH（约$367万），ETH同期跌5.7%', imp:'bear', ago:'2小时前', brief:'Buterin过去48小时内卖出1,869枚ETH约$367万，ETH价格同期从$1,988跌至$1,875（-5.7%）。此前曾卖出6,958 ETH约$1,478万，导致ETH从$2,360跌至$1,825（-22.7%）。原因不明，市场高度关注。'}
     ]
   },
   {
@@ -292,9 +317,9 @@ const ASSETS = [
       {name:'Live Bitcoin News',url:'https://www.livebitcoinnews.com'}
     ],
     items:[
-      {num:14, title:'Solana现货ETF逆势净流入$240万，Bitwise BSOL领跑，累计$8.8亿', imp:'bull', brief:'在BTC/ETH ETF全面流出背景下，SOL ETF逆势吸引净流入——机构资金正在做SOL vs BTC/ETH的相对价值置换，信号意义强烈。'},
-      {num:15, title:'Solana链上RWA代币化总值突破$1.66亿历史新高，PayPal PYUSD默认集成', imp:'bull', brief:'RWA总值创Solana历史新高；PayPal PYUSD在SOL上默认集成提供法币锚定结算层；Solana从"Meme链"进化为"机构级RWA结算层"的早期验证完成。'},
-      {num:34, title:'🐦 X KOL | Zora跨链至Solana推出"注意力市场"（Attention Markets）——SocialFi×高速交易融合', imp:'bull', brief:'以太坊老牌NFT平台Zora将SocialFi"注意力市场"移植至Solana，让用户买卖社交热度并从中获利；Solana日活用户突破320万，亚秒级出块和超低手续费使其成为SocialFi微交易的理想底层。KOLs热议"社交影响力可量化变现"新范式。Source: @zora / CCN'}
+      {num:14, title:'Solana现货ETF逆势净流入$240万，Bitwise BSOL领跑，累计$8.8亿', imp:'bull', ago:'4小时前', brief:'在BTC/ETH ETF全面流出背景下，SOL ETF逆势吸引净流入——机构资金正在做SOL vs BTC/ETH的相对价值置换，信号意义强烈。'},
+      {num:15, title:'Solana链上RWA代币化总值突破$1.66亿历史新高，PayPal PYUSD默认集成', imp:'bull', ago:'1天前', brief:'RWA总值创Solana历史新高；PayPal PYUSD在SOL上默认集成提供法币锚定结算层；Solana从"Meme链"进化为"机构级RWA结算层"的早期验证完成。'},
+      {num:34, title:'🐦 X KOL | Zora跨链至Solana推出"注意力市场"（Attention Markets）——SocialFi×高速交易融合', imp:'bull', ago:'5小时前', brief:'以太坊老牌NFT平台Zora将SocialFi"注意力市场"移植至Solana，让用户买卖社交热度并从中获利；Solana日活用户突破320万，亚秒级出块和超低手续费使其成为SocialFi微交易的理想底层。KOLs热议"社交影响力可量化变现"新范式。Source: @zora / CCN'}
     ]
   },
   {
@@ -308,16 +333,16 @@ const ASSETS = [
       {name:'CryptoTicker',url:'https://cryptoticker.io/en/hyperliquid-hype-price-surge-analysis-feb-2026/'}
     ],
     items:[
-      {num:16, title:'Hyperliquid 2026年初至今DEX累计交易量突破$2.6万亿', imp:'bull', brief:'在整个市场极度恐慌中持续引领链上衍生品；日均体量约为Binance衍生品的3-4%（一年前为0.5%）；熊市反而是验证业务韧性的最佳场景。注意3月6日992万枚代币解锁风险。'},
-      {num:35, title:'🐦 X KOL | Hyperliquid政策中心HPC成立（$2900万HYPE），前Blockchain Association法律官Jake Chervinsky任CEO', imp:'bull', brief:'Hyperliquid向华盛顿正式宣战：HPC以$2900万HYPE资金游说国会，专注于DeFi衍生品（永续合约）监管，明确反对将DeFi前端纳入KYC强制注册要求。Chervinsky为Variant VC前CLO，政策经验丰富。DeFi赛道首次有项目系统性投入华府政策资源。Source: @jakechervinsky / @HyperliquidX'},
-      {num:36, title:'🐦 X KOL | 纳斯达克上市公司Hyperliquid Strategy（$PURR）豪掷$1.295亿购500万枚HYPE，减少流通供应', imp:'bull', brief:'类比Strategy对BTC的持续积累——Hyperliquid Strategy将成为$HYPE的上市公司持仓载体；500万枚HYPE（约占总供应量1.5%）进入企业资产负债表，减少二级市场流通量；企业金库叙事正从BTC向Perp DEX代币延伸。Source: @PURRstrategy / CoinMarketCap'}
+      {num:16, title:'Hyperliquid 2026年初至今DEX累计交易量突破$2.6万亿', imp:'bull', ago:'6小时前', brief:'在整个市场极度恐慌中持续引领链上衍生品；日均体量约为Binance衍生品的3-4%（一年前为0.5%）；熊市反而是验证业务韧性的最佳场景。注意3月6日992万枚代币解锁风险。'},
+      {num:35, title:'🐦 X KOL | Hyperliquid政策中心HPC成立（$2900万HYPE），前Blockchain Association法律官Jake Chervinsky任CEO', imp:'bull', ago:'2天前', brief:'Hyperliquid向华盛顿正式宣战：HPC以$2900万HYPE资金游说国会，专注于DeFi衍生品（永续合约）监管，明确反对将DeFi前端纳入KYC强制注册要求。Chervinsky为Variant VC前CLO，政策经验丰富。DeFi赛道首次有项目系统性投入华府政策资源。Source: @jakechervinsky / @HyperliquidX'},
+      {num:36, title:'🐦 X KOL | 纳斯达克上市公司Hyperliquid Strategy（$PURR）豪掷$1.295亿购500万枚HYPE，减少流通供应', imp:'bull', ago:'3天前', brief:'类比Strategy对BTC的持续积累——Hyperliquid Strategy将成为$HYPE的上市公司持仓载体；500万枚HYPE（约占总供应量1.5%）进入企业资产负债表，减少二级市场流通量；企业金库叙事正从BTC向Perp DEX代币延伸。Source: @PURRstrategy / CoinMarketCap'}
     ]
   },
   {
     id:'xrp', icon:'✕', name:'XRP & AVAX & Altcoins',
     sc:'slg-bull', sc2:'s-bull', label:'📈 利多',
     heat:'5条相关报道（含1条X KOL热议）',
-    summary:'XRP今日出现历史级别的割肉信号：单周实现亏损$19.3亿，为2022年以来最大恐慌性抛售。历史数据显示：上次出现类似规模割肉（2022年11月）后的8个月内，XRP累计涨幅达+114%。标准渣打下调XRP目标至$2.80（-65%），但技术层面底部信号明显。AVAX方面，VanEck ETF日净流入$426万创纪录，FIFA将NFT平台迁移至Avalanche。',
+    summary:'XRP单周实现亏损$19.3亿，为2022年以来最大割肉潮（历史后续+114%）。Ripple CEO Brad Garlinghouse：90%概率Clarity Act在4月前通过，XRP ETF周净流入$3,340万领跑山寨币。标准渣打下调目标至$2.80但仍代表+100%上行空间。AVAX方面，VanEck VAVX ETF日净流入$426万创纪录，FIFA将NFT平台迁移至Avalanche。',
     analysis:`XRP的$19.3亿周度实现亏损是本日最重要的链上信号之一：\n\n**XRP割肉潮的历史对照**：\n- 当大规模实现亏损出现时，意味着"被套牢的短期持有者"已在绝望中割肉离场\n- 上次类似规模：2022年11月（FTX暴雷期间）→ 此后8个月XRP累计涨幅+114%\n- 实现亏损峰值 = 最后的恐慌抛售 = 更强手接盘 = 价格基础更稳定\n\n**标准渣打下调目标的解读**：\n- 从$8下调至$2.80（-65%）反映了对当前宏观环境的谨慎，但$2.80本身意味着从当前$1.39附近仍有+100%的空间\n- 机构下调目标≠看跌，往往反而是"充分反映悲观情绪"后的底部信号\n\n**AVAX的制度性进展**：\n- VanEck AVAX ETF日净流入$426万创纪录，机构认可度继续上升\n- FIFA将NFT平台迁移至Avalanche，验证其子网架构在主流IP商业化场景的可用性\n- Avalanche RWA TVL已达$13亿（BlackRock $5亿基金+FIS代币化贷款），机构RWA赛道中SOL和AVAX并驾齐驱`,
     sources:[
       {name:'CoinDesk',url:'https://www.coindesk.com/markets/2026/02/22/xrp-falls-4-as-network-sees-biggest-realized-loss-spike-since-2022'},
@@ -325,11 +350,12 @@ const ASSETS = [
       {name:'CoinMarketCap AI',url:'https://coinmarketcap.com/cmc-ai/avalanche/latest-updates/'}
     ],
     items:[
-      {num:17, title:'XRP单周实现亏损$19.3亿，为2022年以来最大割肉潮，历史后续涨幅+114%', imp:'bull', brief:'历史数据：上次类似规模割肉（2022年11月FTX崩盘期间）后的8个月内XRP累计涨幅达+114%；实现亏损峰值往往标志着最后一波恐慌性抛售结束。'},
-      {num:18, title:'标准渣打将XRP年底目标下调65%（$8→$2.80），机构目标现实化', imp:'bear', brief:'目标大幅下调反映宏观环境谨慎，但$2.80相对当前价格$1.39仍代表+100%上行空间；机构充分定价悲观情绪往往是底部特征。'},
-      {num:19, title:'AVAX VanEck ETF日净流入$426万创纪录，FIFA迁移NFT至Avalanche', imp:'bull', brief:'VanEck AVAX ETF吸引$426万单日创纪录流入，累计超$37M；FIFA将NFT平台迁移至Avalanche生态，验证子网架构主流IP商业化可用性。'},
-      {num:37, title:'🐦 X KOL | AXS单日暴涨18%，成2月23日市场最强领涨资产——轮动机会窗口', imp:'bull', brief:'Axie Infinity（AXS）今日大涨18%，成为大盘恐慌中逆势领涨的代表性山寨币。KOL们解读为"恐慌市场中的资金轮动效应"——主流币失去方向时，部分资金选择押注被严重低估的GameFi赛道复活。AXS本轮最大跌幅逾90%，反弹弹性极大。Source: @bitget_news / Bitget News'},
-      {num:41, title:'日本某头部券商将发行$6500万 XRP 支付区块链债券，机构采用里程碑', imp:'bull', brief:'日本一家主流证券公司宣布将在区块链上发行价值$6500万的债券，利息支付以XRP结算——这是日本传统金融机构将XRP用于真实金融产品结算的首批案例之一，标志着XRP从"支付叙事"真正落地传统金融。Source: CoinDesk / The Block'}
+      {num:17, title:'XRP单周实现亏损$19.3亿，为2022年以来最大割肉潮，历史后续涨幅+114%', imp:'bull', ago:'5小时前', brief:'历史数据：上次类似规模割肉（2022年11月FTX崩盘期间）后的8个月内XRP累计涨幅达+114%；实现亏损峰值往往标志着最后一波恐慌性抛售结束。'},
+      {num:18, title:'标准渣打将XRP年底目标下调65%（$8→$2.80），机构目标现实化', imp:'bear', ago:'1天前', brief:'目标大幅下调反映宏观环境谨慎，但$2.80相对当前价格$1.37仍代表+100%上行空间；机构充分定价悲观情绪往往是底部特征。'},
+      {num:19, title:'AVAX VanEck ETF日净流入$426万创纪录，FIFA迁移NFT至Avalanche', imp:'bull', ago:'3小时前', brief:'VanEck AVAX ETF吸引$426万单日创纪录流入，累计超$37M；FIFA将NFT平台迁移至Avalanche生态，验证子网架构主流IP商业化可用性。'},
+      {num:37, title:'🐦 X KOL | AXS单日暴涨18%，成2月23日市场最强领涨资产——轮动机会窗口', imp:'bull', ago:'2小时前', brief:'Axie Infinity（AXS）今日大涨18%，成为大盘恐慌中逆势领涨的代表性山寨币。KOL们解读为"恐慌市场中的资金轮动效应"——主流币失去方向时，部分资金选择押注被严重低估的GameFi赛道复活。AXS本轮最大跌幅逾90%，反弹弹性极大。Source: @bitget_news / Bitget News'},
+      {num:41, title:'日本某头部券商将发行$6500万 XRP 支付区块链债券，机构采用里程碑', imp:'bull', ago:'1天前', brief:'日本一家主流证券公司宣布将在区块链上发行价值$6500万的债券，利息支付以XRP结算——这是日本传统金融机构将XRP用于真实金融产品结算的首批案例之一，标志着XRP从"支付叙事"真正落地传统金融。Source: CoinDesk / The Block'},
+      {num:43, title:'Ripple CEO：90%概率Clarity Act在4月前通过，XRP ETF周流入$3,340万领跑', imp:'bull', ago:'6小时前', brief:'Brad Garlinghouse公开表示对Clarity Act立法进程"极度乐观"，预计90%概率在4月底前通过。同期数据：尽管BTC/ETH ETF全面流出，XRP周净流入$3,340万领跑所有山寨币，显示机构在下注立法红利。Source: Ripple / CoinDesk'}
     ]
   },
   {
@@ -345,10 +371,10 @@ const ASSETS = [
       {name:'TheStreet Crypto',url:'https://www.thestreet.com/crypto/markets/major-web3-events-shelved-marking-first-cancellations-of-2026'}
     ],
     items:[
-      {num:20, title:'🚨 Infini $4,950万USDC被盗——内部开发者保留管理员密钥潜伏100+天', imp:'bear', brief:'前合约开发者在交付后保留管理员权限超100天后实施攻击；两笔交易（$11.4M+$38M USDC），转换为17,696 ETH后分散。2026年继Bybit后最大DeFi安全事件。'},
-      {num:21, title:'Infini hack资金路径：USDC→DAI→17,696 ETH，经Tornado Cash掩护', imp:'bear', brief:'攻击者先将USDC转为DAI（不可冻结），再购入ETH，通过Uniswap/Sky/0x分散至多地址。创始人Christian Li承诺自赔；涉事开发者电脑已向警方报告。'},
-      {num:22, title:'行业呼吁：合约交付后必须立即清零开发者权限，内部人攻击防御标准需升级', imp:'bear', brief:'Infini事件暴露的根本漏洞：传统代码审计无法发现内部人保留的合法权限。行业新标准呼声：权限白盒审计+交付即清零+多签强制要求成必须。'},
-      {num:23, title:'NFT Paris 2026取消，Web3年度最大NFT展会首次停办', imp:'bear', brief:'四届成功后首次取消，主因：NFT叙事低迷+EU MiCA监管不确定性。2026年首批Web3大型活动取消，是行业阶段性调整的直接体现。'}
+      {num:20, title:'🚨 Infini $4,950万USDC被盗——内部开发者保留管理员密钥潜伏100+天', imp:'bear', ago:'18小时前', brief:'前合约开发者在交付后保留管理员权限超100天后实施攻击；两笔交易（$11.4M+$38M USDC），转换为17,696 ETH后分散。2026年继Bybit后最大DeFi安全事件。'},
+      {num:21, title:'Infini hack资金路径：USDC→DAI→17,696 ETH，经Tornado Cash掩护', imp:'bear', ago:'17小时前', brief:'攻击者先将USDC转为DAI（不可冻结），再购入ETH，通过Uniswap/Sky/0x分散至多地址。创始人Christian Li承诺自赔；涉事开发者电脑已向警方报告。'},
+      {num:22, title:'行业呼吁：合约交付后必须立即清零开发者权限，内部人攻击防御标准需升级', imp:'bear', ago:'15小时前', brief:'Infini事件暴露的根本漏洞：传统代码审计无法发现内部人保留的合法权限。行业新标准呼声：权限白盒审计+交付即清零+多签强制要求成必须。'},
+      {num:23, title:'NFT Paris 2026取消，Web3年度最大NFT展会首次停办', imp:'bear', ago:'1天前', brief:'四届成功后首次取消，主因：NFT叙事低迷+EU MiCA监管不确定性。2026年首批Web3大型活动取消，是行业阶段性调整的直接体现。'}
     ]
   },
   {
@@ -363,10 +389,10 @@ const ASSETS = [
       {name:'TRM Labs',url:'https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26'}
     ],
     items:[
-      {num:24, title:'美国DTC获SEC无异议函，启动3年期证券代币化试点（2026H2开始）', imp:'bull', brief:'DTC管理全球$70万亿以上金融资产；SEC允许其将托管证券代币化——若试点成功，传统金融最核心的基础设施将全面上链，是整个加密RWA赛道的历史级催化剂。'},
-      {num:25, title:'英国FCA发布CP25/40和CP25/41，全面规范加密Trading/Lending/Staking/DeFi', imp:'bull', brief:'英国不完全禁止DeFi但提出合规框架，2026年下半年最终规则落地，2027年实施。主要市场监管框架清晰化持续降低机构进场法律障碍。'},
-      {num:26, title:'Trump关税升至15%：加密监管轨道独立运行，Clarity Act进程不受影响', imp:'neutral', brief:'关税政策带来宏观波动，但美国加密立法（Clarity Act/GENIUS Act）独立推进；监管清晰度与宏观不确定性是两个独立变量，不应混淆判断。'},
-      {num:38, title:'🐦 X KOL | 白宫稳定币第三轮闭门谈判无果——稳定币收益条款争议阻碍市场结构法案推进', imp:'bear', brief:'周四白宫召集第三次加密圆桌会议（银行业+加密行业代表），争议焦点：稳定币是否可以向持有者支付利息收益。银行业极力反对（担忧存款流失），加密行业极力争取（收益型稳定币是核心竞争力）。谈判持续无果意味着GENIUS Act等稳定币法案的时间表继续推迟。Source: @theblock__ / The Block'}
+      {num:24, title:'美国DTC获SEC无异议函，启动3年期证券代币化试点（2026H2开始）', imp:'bull', ago:'2天前', brief:'DTC管理全球$70万亿以上金融资产；SEC允许其将托管证券代币化——若试点成功，传统金融最核心的基础设施将全面上链，是整个加密RWA赛道的历史级催化剂。'},
+      {num:25, title:'英国FCA发布CP25/40和CP25/41，全面规范加密Trading/Lending/Staking/DeFi', imp:'bull', ago:'3天前', brief:'英国不完全禁止DeFi但提出合规框架，2026年下半年最终规则落地，2027年实施。主要市场监管框架清晰化持续降低机构进场法律障碍。'},
+      {num:26, title:'Trump关税升至15%：加密监管轨道独立运行，Clarity Act进程不受影响', imp:'neutral', ago:'5小时前', brief:'关税政策带来宏观波动，但美国加密立法（Clarity Act/GENIUS Act）独立推进；监管清晰度与宏观不确定性是两个独立变量，不应混淆判断。'},
+      {num:38, title:'🐦 X KOL | 白宫稳定币第三轮闭门谈判无果——稳定币收益条款争议阻碍市场结构法案推进', imp:'bear', ago:'1天前', brief:'周四白宫召集第三次加密圆桌会议（银行业+加密行业代表），争议焦点：稳定币是否可以向持有者支付利息收益。银行业极力反对（担忧存款流失），加密行业极力争取（收益型稳定币是核心竞争力）。谈判持续无果意味着GENIUS Act等稳定币法案的时间表继续推迟。Source: @theblock__ / The Block'}
     ]
   },
   {
@@ -381,15 +407,15 @@ const ASSETS = [
       {name:'LiveBitcoinNews',url:'https://www.livebitcoinnews.com/mara-acquires-exaion-stake-as-bitcoin-miner-expands-into-ai-infrastructure/'}
     ],
     items:[
-      {num:27, title:'MARA $1.68亿完成收购法国EDF旗下AI数据中心Exaion 64%股权', imp:'bull', brief:'法国政府批准（含主权保护条款）；MARA将在法国核电网络上运行高性能AI计算；矿工AI化转型里程碑，Exaion AI业务的20-30x估值倍数将重构MARA整体估值。'},
-      {num:28, title:'专用AI模型检测DeFi漏洞能力达92%，AI安全基础设施全面进入加密', imp:'bull', brief:'专门化AI在DeFi安全检测领域能力达92%（优于通用模型），与OpenAI EVMbench互补；AI安全审计将大幅降低DeFi上线成本，加速机构级协议的合规化进程。'}
+      {num:27, title:'MARA $1.68亿完成收购法国EDF旗下AI数据中心Exaion 64%股权', imp:'bull', ago:'2天前', brief:'法国政府批准（含主权保护条款）；MARA将在法国核电网络上运行高性能AI计算；矿工AI化转型里程碑，Exaion AI业务的20-30x估值倍数将重构MARA整体估值。'},
+      {num:28, title:'专用AI模型检测DeFi漏洞能力达92%，AI安全基础设施全面进入加密', imp:'bull', ago:'3天前', brief:'专门化AI在DeFi安全检测领域能力达92%（优于通用模型），与OpenAI EVMbench互补；AI安全审计将大幅降低DeFi上线成本，加速机构级协议的合规化进程。'}
     ]
   },
   {
     id:'stable', icon:'＄', name:'稳定币 & 市场情绪',
     sc:'slg-bull', sc2:'s-bull', label:'📈 利多',
     heat:'4条相关报道（含2条X KOL热议）',
-    summary:'稳定币总市值突破$3,100亿创历史新高，USDC市占率在MiCA压力下持续攀升，USDT份额相应萎缩。恐惧贪婪指数从本周低点5回升至14，仍处极度恐慌区间，但边际改善是最早的情绪修复信号。Infini事件令收益型稳定币产品面临安全叙事压力，但宏观层面稳定币采用趋势丝毫未变。',
+    summary:'稳定币总市值突破$3,100亿创历史新高，USDC市占率在MiCA压力下持续攀升，USDT份额相应萎缩。恐惧贪婪指数今日实时读数为5/100（极度恐慌历史极值）；加密总市值自Trump就职以来已蒸发$1.3万亿，Binance现货交易量下滑95%。但稳定币池创历史新高说明资金未离场，等待信号出现。',
     analysis:`今日两个值得关注的情绪指标：\n\n**稳定币市值$3,100亿创历史新高**：\n- 在加密价格持续下跌、BTC YTD-24%的背景下，稳定币市值反创新高——这是"资金没有离场，只是在等待"的最直接证据\n- 稳定币池子越大，下一轮行情的弹药越充足\n- USDC继续受益于MiCA合规压力下USDT份额流失；Circle的IPO进程是2026年最重要的加密相关上市催化剂，预计将进一步强化USDC的机构采用\n- Infini事件对收益型稳定币产品（Infini的核心业务）造成短期信任损耗，但不影响USDC/USDT主流产品\n\n**恐惧贪婪指数14/100：边际修复**：\n- 从本周历史低点5（上周）回升至14，绝对值仍处极度恐慌，但**方向改变是最重要的**\n- 历史数据：恐惧贪婪指数的反转往往领先价格反转2-4周\n- 结合BTC Sharpe Ratio历史低点（-38.38）和小散户积累创年内新高，三项指标同时发出底部信号的组合，在历史上出现次数极少\n\n**结论**：稳定币市值创新高+恐惧指数边际回升+散户积累增加，三者组合构成最典型的"熊市末期、牛市黎明前"市场特征。`,
     sources:[
       {name:'CoinDesk',url:'https://www.coindesk.com'},
@@ -397,10 +423,10 @@ const ASSETS = [
       {name:'BitDegree',url:'https://www.bitdegree.org'}
     ],
     items:[
-      {num:29, title:'稳定币总市值突破$3,100亿创历史新高，USDC市占率持续攀升', imp:'bull', brief:'加密价格下跌中稳定币市值创新高，说明资金没有离场只是等待；USDC受益于MiCA合规压力下USDT份额流失；Circle IPO是2026年最大加密相关上市催化剂。'},
-      {num:30, title:'恐惧贪婪指数从5回升至14，边际改善是最早的情绪修复信号', imp:'bull', brief:'从历史低点5回升至14，绝对值仍"极度恐慌"但方向改变最重要；结合BTC Sharpe Ratio历史低点+散户积累创新高，三重底部信号同时出现，历史上极为罕见。'},
-      {num:39, title:'🐦 X KOL | 前Binance上币BD内部爆料：市场操纵"明目张胆"，市值=流动性×注意力×筹码结构', imp:'bear', brief:'WuBlockchain转载：前Binance上币负责人Chase在直播中指出"加密估值体系完全由流动性、注意力和筹码结构决定，没有人关注长期"；市值操纵者行为"肆无忌惮，没有人再假装不知"。对价值投资者是强烈警示：短期市值不代表长期价值。Source: @WuBlockchain'},
-      {num:40, title:'🐦 X KOL | GRASS代币（$GRASS）2月28日解锁13.15%总供应量，警惕短期抛压', imp:'bear', brief:'$GRASS（Grass DePIN网络代币）将于2月28日解锁约13.15%总供应量——这是近一周内加密市场最大的计划性代币解锁事件之一。KOL普遍提示：大比例解锁叠加熊市情绪，持仓者需提前做好流动性管理，解锁前后通常出现显著价格波动。Source: @GrassLayer'}
+      {num:29, title:'稳定币总市值突破$3,100亿创历史新高，USDC市占率持续攀升', imp:'bull', ago:'8小时前', brief:'加密价格下跌中稳定币市值创新高，说明资金没有离场只是等待；USDC受益于MiCA合规压力下USDT份额流失；Circle IPO是2026年最大加密相关上市催化剂。'},
+      {num:30, title:'恐惧贪婪指数实时5/100（极度恐慌），触及FTX暴雷以来最低值', imp:'bear', ago:'刚刚', brief:'今日实时读数5/100，逼近"绝对恐慌"历史极值。但历史规律：恐惧贪婪指数触及单位数时，往往是底部附近反向信号；结合BTC Sharpe Ratio历史低点（-38.38）+散户积累创新高，三重底部信号同时出现，历史上极为罕见。'},
+      {num:39, title:'🐦 X KOL | 前Binance上币BD内部爆料：市场操纵"明目张胆"，市值=流动性×注意力×筹码结构', imp:'bear', ago:'2天前', brief:'WuBlockchain转载：前Binance上币负责人Chase在直播中指出"加密估值体系完全由流动性、注意力和筹码结构决定，没有人关注长期"；市值操纵者行为"肆无忌惮，没有人再假装不知"。对价值投资者是强烈警示：短期市值不代表长期价值。Source: @WuBlockchain'},
+      {num:40, title:'🐦 X KOL | GRASS代币（$GRASS）2月28日解锁13.15%总供应量，警惕短期抛压', imp:'bear', ago:'1天前', brief:'$GRASS（Grass DePIN网络代币）将于2月28日解锁约13.15%总供应量——这是近一周内加密市场最大的计划性代币解锁事件之一。KOL普遍提示：大比例解锁叠加熊市情绪，持仓者需提前做好流动性管理，解锁前后通常出现显著价格波动。Source: @GrassLayer'}
     ]
   }
 ];
@@ -410,7 +436,7 @@ const ASSETS = [
 // ═══════════════════════════════════════
 // 更新时间记录
 const TOPIC_UPDATED = {time:'2026-02-22', stale:true,  label:'源站最近更新'};
-const NEWS_UPDATED  = {time:'2026-02-23 03:03', stale:false, label:'News 最近更新'};
+const NEWS_UPDATED  = {time:'2026-02-23 11:30 CST', stale:false, label:'News 最近更新'};
 
 let mode='news', curTopic=0, curAsset=0;
 
@@ -496,6 +522,7 @@ function renderAsset(){
       <div class="n-item-head" onclick="toggleItem(this)">
         <div class="n-item-num">${it.num}</div>
         <div class="n-item-title">${it.title}</div>
+        ${it.ago?`<span class="n-item-time">🕐 ${it.ago}</span>`:''}
         <span class="n-item-imp ${iMap[it.imp]||'imp-neutral'}">${iLbl[it.imp]||'中性'}</span>
         <span class="n-expand">▼</span>
       </div>
@@ -508,7 +535,7 @@ function renderAsset(){
     <div class="src-row">${src}<span class="heat-tag">🔥 ${a.heat}</span></div>
     <div class="sec-h">综合判断</div><div class="body"><p>${a.summary}</p></div>
     <div class="sec-h">深度分析</div><div class="body"><p>${fmt(a.analysis)}</p></div>
-    <div class="sec-h">相关报道 <span style="font-weight:400;font-size:12px;color:var(--sub);margin-left:4px">点击展开详情</span></div>
+    <div class="sec-h">相关报道 <span style="font-weight:400;font-size:11px;color:var(--sub);margin-left:4px">点击展开详情</span></div>
     <div class="news-items">${items}</div>
     <div class="nav-row">
       <button class="nav-btn" onclick="selectAsset(${curAsset-1})" ${curAsset===0?'disabled':''}>← 上一标的</button>
