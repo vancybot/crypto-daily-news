@@ -144,8 +144,8 @@ main{flex:1;min-width:0}
     <span>恐慌指数 <b class="fear">14/100 😱</b></span>
   </div>
   <div class="tab-nav">
-    <div class="tab-btn active" id="tabTopic" onclick="switchTab('topic')">Topic Front</div>
-    <div class="tab-btn" id="tabNews" onclick="switchTab('news')">News</div>
+    <div class="tab-btn active" id="tabNews" onclick="switchTab('news')">News</div>
+    <div class="tab-btn" id="tabTopic" onclick="switchTab('topic')">Topic</div>
   </div>
   <div class="upd-pill" id="updPill"><div class="upd-dot stale" id="updDot"></div><span id="updText">…</span></div>
   <div class="date-pill">📅 2026-02-23</div>
@@ -412,12 +412,12 @@ const ASSETS = [
 const TOPIC_UPDATED = {time:'2026-02-22', stale:true,  label:'源站最近更新'};
 const NEWS_UPDATED  = {time:'2026-02-23 03:03', stale:false, label:'News 最近更新'};
 
-let mode='topic', curTopic=0, curAsset=0;
+let mode='news', curTopic=0, curAsset=0;
 
 function switchTab(m){
   mode=m;
-  document.getElementById('tabTopic').className='tab-btn'+(m==='topic'?' active':'');
   document.getElementById('tabNews').className='tab-btn'+(m==='news'?' active':'');
+  document.getElementById('tabTopic').className='tab-btn'+(m==='topic'?' active':'');
   const upd = m==='topic' ? TOPIC_UPDATED : NEWS_UPDATED;
   document.getElementById('updDot').className='upd-dot'+(upd.stale?' stale':'');
   document.getElementById('updText').innerHTML=upd.label+'：<b>'+upd.time+'</b>'+(upd.stale?' ⚠️ 未更新':'');
@@ -517,8 +517,8 @@ function renderAsset(){
     </div>`;
 }
 
-// 初始化时间戳显示（默认 topic tab）
-const _initUpd = TOPIC_UPDATED;
+// 初始化时间戳显示（默认 news tab）
+const _initUpd = NEWS_UPDATED;
 document.getElementById('updDot').className='upd-dot'+(_initUpd.stale?' stale':'');
 document.getElementById('updText').innerHTML=_initUpd.label+'：<b>'+_initUpd.time+'</b>'+(_initUpd.stale?' ⚠️ 未更新':'');
 
